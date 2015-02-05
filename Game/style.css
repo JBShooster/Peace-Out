@@ -1,0 +1,37 @@
+#logo{
+	margin: 0 auto;
+	display:block;
+	margin-top:5px;
+	margin-bottom:15px;
+	color: FC0AF4;
+}
+
+#viewport {
+	display: block;
+	border: 1px solid blue;
+	margin: 0 auto;
+	background: url("space.jpg");
+	background-size: cover;
+	height: 550px;
+	width: 800px;
+}
+
+#lives{
+	position: relative;
+	margin: 0 auto;
+	text-align: center;
+	display:block;
+	color: #FC0AF4;
+}
+
+#info{
+	display:block;
+	margin: 0 auto;
+	text-align: center;
+	color: #FC0AF4;
+}
+
+body{
+	background-color: blue;
+}
+
