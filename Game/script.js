@@ -3,6 +3,7 @@ Physics(function(world){
   var viewWidth = 800;
   var viewHeight = 550;
 
+
 var gameState = false;
 var player;
 var start = window.addEventListener('keyup', function(event){
@@ -10,6 +11,8 @@ var start = window.addEventListener('keyup', function(event){
 	if (event.keyCode === 32){
 		if(gameState === false){
 		game();
+        var startSound = new Audio("Sounds/warble.mp3");
+        startSound.play();
 		gameState = true;
 		}
 		else{
@@ -87,6 +90,7 @@ totalLives.innerHTML = "Lives: "+ currentLives;
 // bounds of the window
 var viewportBounds = Physics.aabb(0, 0, viewWidth, viewHeight);
 
+
 // constrain objects to these bounds
 world.add(Physics.behavior('edge-collision-detection', {
     aabb: viewportBounds,
@@ -153,17 +157,23 @@ var collisionHandlers = function(data){
                 if(impact.bodyA.objType =='ball'){
                 world.removeBody(impact.bodyB);
                 bricks -= 1;
-                console.log(bricks - 1)
+                console.log(bricks - 1);
+                var brickSound = new Audio("Sounds/clink.mp3");
+                brickSound.play();
                 } 
                 else{
                   world.removeBody(impact.bodyA);
                   bricks -= 1;
-                  console.log(bricks - 1)
+                  console.log(bricks - 1);
+                  var brickSound = new Audio("Sounds/clink.mp3");
+                  brickSound.play();
                 } 
             }
       }
       if(ball.state.pos.y >= 535){
         console.log("DEAD!");
+        var deadSound= new Audio("Sounds/beep_2.mp3");
+        deadSound.play();
         // ball.restitution= 1;
         // ball.cof= 0;
         ball.state.pos.set(player.state.pos.x, 500);
@@ -190,10 +200,13 @@ var collisionHandlers = function(data){
           world.removeBody(ball);
           world.removeBody(player);
           world.off('collision:detected', collisionHandlers);
+          var winSound = new Audio("Sound/win.mp3");
+          winSound.play();
           gameState = false;
           currentLives = 3;
           level ++;
           totalLives.innerHTML = "CONGRATS! Press SPACEBAR for the next level.";
+
         }
 };
 world.on('collisions:detected', collisionHandlers); 
@@ -669,14 +682,14 @@ bricks = 94;
 //LEVEL 3 PROPERTIES
 if (level ===3){
 brick = [];
-bricks = 20;
-    for ( var i = 0, l = 1; i < l; ++i ){
+bricks = 168;
+    for ( var i = 0, l = 3; i < l; ++i ){
 
         brick.push( Physics.body('rectangle', {
             width: 40
             ,height: 20
             ,treatment: 'static'
-            ,x: 390
+            ,x: 380 + (i*40)
             ,y: 50
             ,vx: 0
             ,vy: 0
@@ -684,14 +697,367 @@ bricks = 20;
             ,restitution: 1
       ,objType: 'brick'
             ,styles: {
-                fillStyle: '#FC0AF4'
+                fillStyle: 'white'
                 ,lineWidth: 1
                 ,width: 40
                 ,height: 40
             }
         }));
     }
-};
+
+    for ( var i = 0, l = 5; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 340 + (i*40)
+            ,y: 71
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'blue'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 7; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 300 + (i*40)
+            ,y: 91
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'lime'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 9; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 260 + (i*40)
+            ,y: 111
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'blue'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 11; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 220 + (i*40)
+            ,y: 131
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'lime'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+      } 
+        for ( var i = 0, l = 13; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 180 + (i*40)
+            ,y: 151
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'blue'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 13; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 180 + (i*40)
+            ,y: 171
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'lime'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 15; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 140 + (i*40)
+            ,y: 191
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'blue'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 15; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 140 + (i*40)
+            ,y: 211
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'lime'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+    for ( var i = 0, l = 15; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 140 + (i*40)
+            ,y: 231
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'blue'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 13; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 180 + (i*40)
+            ,y: 251
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'lime'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 13; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 180 + (i*40)
+            ,y: 271
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'blue'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+    for ( var i = 0, l = 11; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 220 + (i*40)
+            ,y: 291
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'lime'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 9; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 260 + (i*40)
+            ,y: 311
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'blue'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 7; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 300 + (i*40)
+            ,y: 331
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'lime'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 5; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 340 + (i*40)
+            ,y: 351
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'blue'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    for ( var i = 0, l = 3; i < l; ++i ){
+
+        brick.push( Physics.body('rectangle', {
+            width: 40
+            ,height: 20
+            ,treatment: 'static'
+            ,x: 380 + (i*40)
+            ,y: 371
+            ,vx: 0
+            ,vy: 0
+            ,cof: 0
+            ,restitution: 1
+      ,objType: 'brick'
+            ,styles: {
+                fillStyle: 'white'
+                ,lineWidth: 1
+                ,width: 40
+                ,height: 40
+            }
+        }));
+    }
+
+    }
+
+
+
     world.add(brick);
 
 
